@@ -1,4 +1,1 @@
-# SimpleModeling
-Simple Modeling Library in C# for Unity3d
-
-
+Simple Modeling and Event System for C# and Unity3D
