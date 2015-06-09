@@ -33,7 +33,7 @@ namespace jwm.Model
             NotifyListeners(new ModelMapAddEvent(this, key, value));
         }
 
-        public override void Clear()
+        public void Clear()
         {
             foreach (AbstractModel child in Map.Values)
             {
@@ -45,11 +45,6 @@ namespace jwm.Model
             NotifyListeners(new ModelMapClearEvent(this));
         }
 
-        public override bool Contains(AbstractModel value)
-        {
-            return Map.ContainsValue(value);
-        }
-        
         public ICollection Keys
         {
             get { return Map.Keys; }
@@ -81,11 +76,6 @@ namespace jwm.Model
 
                 NotifyListeners(new ModelMapSetEvent(this, key, oldChild, value));
             }
-        }
-
-        public override int Count
-        {
-            get { return Map.Count; }
         }
 
         public bool ContainsKey(string key)
@@ -147,7 +137,22 @@ namespace jwm.Model
             return this.Remove(item.Key);
         }
 
-        public new IEnumerator<KeyValuePair<string, AbstractModel>> GetEnumerator()
+        public int Count
+        {
+            get { return Map.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public IEnumerator<KeyValuePair<string, AbstractModel>> GetEnumerator()
+        {
+            return Map.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return Map.GetEnumerator();
         }

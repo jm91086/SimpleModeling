@@ -6,14 +6,14 @@ using System.Text;
 
 namespace jwm.Model
 {
-    public abstract class AbstractModelCollection : AbstractModel, ICollection, IEnumerable, ICloneable
+    public abstract class AbstractModelCollection : AbstractModel
     {
         private ChildCollectionListener listener;
         protected ChildCollectionListener ChildListener
         {
             get
             {
-                if ( listener == null )
+                if (listener == null)
                 {
                     listener = new ChildCollectionListener(this);
                 }
@@ -57,61 +57,6 @@ namespace jwm.Model
                 return Collection;
             }
         }
-
-        public abstract void Add(AbstractModel item);
-
-        public abstract void Clear();
-
-        public abstract bool Contains(AbstractModel item);
-
-        public abstract void CopyTo(AbstractModel[] array, int arrayIndex);
-
-        public virtual int Count
-        {
-            get
-            {
-                return 0;
-            }
-        }
-
-        public virtual bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public abstract bool Remove(AbstractModel item);
-
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual object Clone()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(Array array, int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsSynchronized
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public object SyncRoot
-        {
-            get { throw new NotImplementedException(); }
-        }
     }
+        
 }

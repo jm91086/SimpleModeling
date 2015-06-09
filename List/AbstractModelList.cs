@@ -23,7 +23,7 @@ namespace jwm.Model
             }
         }
 
-        public override void Add(AbstractModel value)
+        public void Add(AbstractModel value)
         {
             AddChildListener(value);
 
@@ -32,7 +32,7 @@ namespace jwm.Model
             NotifyListeners(new ModelListAddEvent(this, List.Count - 1, value));
         }
 
-        public override void Clear()
+        public void Clear()
         {
             foreach ( AbstractModel child in List )
             {
@@ -44,7 +44,7 @@ namespace jwm.Model
             NotifyListeners(new ModelListClearEvent(this));
         }
 
-        public override bool Contains(AbstractModel value)
+        public bool Contains(AbstractModel value)
         {
             return List.Contains(value);
         }
@@ -63,7 +63,7 @@ namespace jwm.Model
             NotifyListeners(new ModelListAddEvent(this, index, value));
         }
 
-        public override bool Remove(AbstractModel value)
+        public bool Remove(AbstractModel value)
         {
             int index = IndexOf(value);
 
@@ -120,18 +120,28 @@ namespace jwm.Model
             }
         }
 
-        public override void CopyTo(AbstractModel[] array, int index)
+        public void CopyTo(AbstractModel[] array, int index)
         {
             List.CopyTo(array, index);
         }
 
-        public override int Count
+        public int Count
         {
             get { return List.Count; }
         }
 
 
-        public new IEnumerator<AbstractModel> GetEnumerator()
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public IEnumerator<AbstractModel> GetEnumerator()
+        {
+            return List.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return List.GetEnumerator();
         }
