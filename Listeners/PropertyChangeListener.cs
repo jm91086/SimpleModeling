@@ -11,7 +11,6 @@ namespace jwm.Model
 {
     public abstract class PropertyChangeListener : AbstractModelListener
     {
-        public AbstractModel Source;
         public string propertyName;
         public string PropertyName
         {
@@ -33,12 +32,5 @@ namespace jwm.Model
             PropertyChangeEvent pce = mEvent as PropertyChangeEvent;
             return (pce != null && (string.IsNullOrEmpty(PropertyName) || pce.Property.Equals(PropertyName, StringComparison.OrdinalIgnoreCase)));
         }
-
-        protected override AbstractModel GetSource()
-        {
-            return Source;
-        }
     }
-
-
 }

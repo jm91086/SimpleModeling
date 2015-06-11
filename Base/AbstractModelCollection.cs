@@ -52,10 +52,6 @@ namespace jwm.Model
                 Collection.NotifyListeners(new ModelCollectionChildEvent(Collection, mEvent));
             }
 
-            protected override AbstractModel GetSource()
-            {
-                return Collection;
-            }
         }
     }
         

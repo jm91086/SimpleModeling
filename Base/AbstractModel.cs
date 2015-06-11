@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace jwm.Model
 {
-    public abstract class AbstractModel : MonoBehaviour
+    [Serializable]
+    public abstract class AbstractModel
     {
         protected List<AbstractModelListener> listeners;
 
@@ -24,9 +25,12 @@ namespace jwm.Model
 
         public bool AddListener(AbstractModelListener listener)
         {
+            Debug.Log(GetType() + ".AddListener");
             if ( !Listeners.Contains(listener) )
             {
+                Debug.Log(GetType() + ".AddListener Adding Listener");
                 Listeners.Add(listener);
+                listener.ReceiveEvent(new ModelSetEvent(this));
                 return true;
             }
             return false;
@@ -37,12 +41,15 @@ namespace jwm.Model
             return Listeners.Remove(listener);
         }
 
-        protected void NotifyListeners(AbstractModelEvent mEvent)
+        public void NotifyListeners(AbstractModelEvent mEvent)
         {
             foreach ( AbstractModelListener listener in Listeners )
             {
                 listener.ReceiveEvent(mEvent);
             }
+
         }
+
+        abstract public void CopyTo(AbstractModel model);
     }
 }

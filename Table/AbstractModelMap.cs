@@ -156,5 +156,19 @@ namespace jwm.Model
         {
             return Map.GetEnumerator();
         }
+
+        public override void CopyTo(AbstractModel model)
+        {
+            AbstractModelMap map = model as AbstractModelMap;
+            if (map != null)
+            {
+                map.Map.Clear();
+                foreach ( KeyValuePair<string, AbstractModel> kv in this.Map )
+                {
+                    map.Add(kv.Key, kv.Value);
+                }
+                map.NotifyListeners(new ModelSetEvent(map));
+            }
+        }
     }
 }
