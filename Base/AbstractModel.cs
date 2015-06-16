@@ -7,49 +7,46 @@ using UnityEngine;
 namespace jwm.Model
 {
     [Serializable]
-    public abstract class AbstractModel
+    public abstract class AbstractModel : IModel
     {
-        protected List<AbstractModelListener> listeners;
+        private List<IModelListener> listeners;
 
-        protected List<AbstractModelListener> Listeners
+        protected List<IModelListener> Listeners
         {
             get
             {
                 if ( listeners == null )
                 {
-                    listeners = new List<AbstractModelListener>();
+                    listeners = new List<IModelListener>();
                 }
                 return listeners;
             }
         }
 
-        public bool AddListener(AbstractModelListener listener)
+        public bool AddListener(IModelListener listener)
         {
             Debug.Log(GetType() + ".AddListener");
             if ( !Listeners.Contains(listener) )
             {
                 Debug.Log(GetType() + ".AddListener Adding Listener");
                 Listeners.Add(listener);
-                listener.ReceiveEvent(new ModelSetEvent(this));
                 return true;
             }
             return false;
         }
 
-        public bool RemoveListener(AbstractModelListener listener)
+        public bool RemoveListener(IModelListener listener)
         {
             return Listeners.Remove(listener);
         }
 
-        public void NotifyListeners(AbstractModelEvent mEvent)
+        public void NotifyListeners(IModelEvent mEvent)
         {
-            foreach ( AbstractModelListener listener in Listeners )
+            foreach (IModelListener listener in Listeners)
             {
                 listener.ReceiveEvent(mEvent);
             }
 
         }
-
-        abstract public void CopyTo(AbstractModel model);
     }
 }

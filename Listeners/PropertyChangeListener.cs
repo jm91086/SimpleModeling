@@ -1,5 +1,4 @@
-﻿using jwm.Model.Interfaces;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace jwm.Model
             }
         }
 
-        public override bool HandlesEvent(AbstractModelEvent mEvent)
+        public override bool HandlesEvent(IModelEvent mEvent)
         {
             PropertyChangeEvent pce = mEvent as PropertyChangeEvent;
             return (pce != null && (string.IsNullOrEmpty(PropertyName) || pce.Property.Equals(PropertyName, StringComparison.OrdinalIgnoreCase)));

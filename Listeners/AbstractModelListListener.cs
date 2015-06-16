@@ -16,7 +16,7 @@ namespace jwm.Model
             this.objectMap = new Dictionary<AbstractModel, object>();
         }
 
-        public override bool HandlesEvent(AbstractModelEvent mEvent)
+        public override bool HandlesEvent(IModelEvent mEvent)
         {
             Debug.Log(GetType() + ".HandlesEvent: " + mEvent.GetType());
 
@@ -29,7 +29,7 @@ namespace jwm.Model
             return false;
         }
 
-        public override void ReceiveEvent(AbstractModelEvent mEvent)
+        public override void ReceiveEvent(IModelEvent mEvent)
         {
             Debug.Log(GetType() + ".ReceiveEvent");
             if ( HandlesEvent(mEvent) )
@@ -44,7 +44,7 @@ namespace jwm.Model
 
         }
 
-        protected override void ProcessEvent(AbstractModelEvent evt)
+        public override void ProcessEvent(IModelEvent evt)
         {
             //Do nothing
         }

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace jwm.Model
 {
-    public abstract class AbstractModelEvent
+    public abstract class AbstractModelEvent : IModelEvent
     {
-        public AbstractModel Source
+        public IModel Source
         {
             get;
             private set;
@@ -49,7 +49,7 @@ namespace jwm.Model
             private set;
         }
 
-        public AbstractModelEvent(AbstractModel source, string property, object oldVal, object newVal)
+        public AbstractModelEvent(IModel source, string property, object oldVal, object newVal)
         {
             Source = source;
             OldType = null;
@@ -70,5 +70,6 @@ namespace jwm.Model
             NewValue = newVal;
             Timestamp = DateTime.Now;
         }
+
     }
 }

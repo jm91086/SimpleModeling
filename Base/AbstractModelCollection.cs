@@ -47,9 +47,13 @@ namespace jwm.Model
                 Collection = collection;
             }
 
-            protected override void ProcessEvent(AbstractModelEvent mEvent)
+            public override void ProcessEvent(IModelEvent mEvent)
             {
-                Collection.NotifyListeners(new ModelCollectionChildEvent(Collection, mEvent));
+                AbstractModelEvent ame = mEvent as AbstractModelEvent;
+                if ( ame != null )
+                { 
+                    Collection.NotifyListeners(new ModelCollectionChildEvent(Collection, ame));
+                }
             }
 
         }

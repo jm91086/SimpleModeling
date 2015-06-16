@@ -146,15 +146,5 @@ namespace jwm.Model
             return List.GetEnumerator();
         }
 
-        public override void CopyTo(AbstractModel model)
-        {
-            AbstractModelList list = model as AbstractModelList;
-            if ( list != null )
-            {
-                list.List.Clear();
-                list.List.AddRange(this.List);
-                list.NotifyListeners(new ModelSetEvent(list));
-            }
-        }
     }
 }

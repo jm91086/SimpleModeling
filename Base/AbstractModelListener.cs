@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace jwm.Model
 {
-    public abstract class AbstractModelListener : AbstractModel
+    public abstract class AbstractModelListener : AbstractModel, IModelListener
     {
         public static readonly string PRP_SOURCE = "Source";
         protected AbstractModel source;
@@ -44,12 +44,12 @@ namespace jwm.Model
             }
         }
 
-        public virtual bool HandlesEvent(AbstractModelEvent mEvent)
+        public virtual bool HandlesEvent(IModelEvent mEvent)
         {
             return true;
         }
 
-        virtual public void ReceiveEvent(AbstractModelEvent mEvent)
+        virtual public void ReceiveEvent(IModelEvent mEvent)
         {
             Debug.Log(GetType() + ".ReceiveEvent");
             if ( HandlesEvent(mEvent) )
@@ -58,21 +58,12 @@ namespace jwm.Model
             }
         }
 
-        virtual public AbstractModel GetSource()
+        virtual public IModel GetSource()
         {
             return Source;
         }
 
-        abstract protected void ProcessEvent(AbstractModelEvent evt);
+        abstract public void ProcessEvent(IModelEvent evt);
 
-        public override void CopyTo(AbstractModel model)
-        {
-            AbstractModelListener listener = model as AbstractModelListener;
-            if (listener != null)
-            {
-                listener.source = this.Source;
-                listener.NotifyListeners(new ModelSetEvent(listener));
-            }
-        }
     }
 }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
-namespace jwm.Model.Interfaces
+namespace jwm.Model
 {
-    public interface Named
+    public interface IModelEvent
     {
-        string GetName();
+        IModel Source { get; }
     }
 }
